@@ -1,0 +1,36 @@
+# ArchiCOW configuration file
+#
+# Following INI-file syntax with a few extras.
+# For syntax details see https://docs.python.org/2/library/configparser.html
+
+[DEFAULT]
+# Base directory to hold backups
+target_base = /var/lib/archicow/backup
+process = RsyncProcess
+storage = SimpleStorage
+
+# User-defined values can be used as variables, e.g. %(config_dir)s
+config_dir = /etc/archicow
+
+# Job definition
+# Case sensitive, no whitespace. Replace 'server_backup' with your job name.
+[JOB:server_backup]
+
+# remote SSH user (optional)
+user = rbackup
+
+# remote host
+host = example.com
+
+# SSH key to use (optional)
+key_path = %(config_dir)s/keys/example_key
+
+# Source path on remote host
+source_path = /home/rbackup
+
+# Target path below target_base
+target_path = example.com/rbackup
+
+# Exclude list for rsync, patterns separated by ||
+#exclude = file2||file3
+
