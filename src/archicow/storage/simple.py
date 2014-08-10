@@ -39,8 +39,5 @@ class SimpleStorage(BaseStorage):
             raise ValueError('Unknown target type')
         return BackupTarget(self, target_path)
 
-    def finalize(self, target, error):
-        pass
-
 
 register(SimpleStorage)

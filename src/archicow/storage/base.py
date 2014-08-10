@@ -51,7 +51,7 @@ class BackupTarget(object):
 
 
 class BaseStorage(object):
-    def new_target(self):
+    def new_target(self, type_, path):
         """Prepare a target location for new backup.
         Returns BackupTarget instance.
         """
@@ -59,5 +59,5 @@ class BaseStorage(object):
 
     def finalize(self, target, error):
         """Finalize the target location after backup."""
-        raise NotImplemented
+        pass
 
