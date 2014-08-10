@@ -29,7 +29,7 @@ from .process import process_types
 
 
 def main():
-    logging.basicConfig()
+    logging.basicConfig(level=logging.DEBUG)
     logger = logging.getLogger(__name__)
     # command line arguments
     parser = argparse.ArgumentParser(description=app_name_desc)
@@ -46,7 +46,7 @@ def main():
     args = parser.parse_args()
 
     if args.verbose:
-        logging.basicConfig(level=logging.DEBUG)
+        pass
 
     # read config file, with default values for optional fields
     config = CustomConfigParser()

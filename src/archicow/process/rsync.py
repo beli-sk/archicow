@@ -17,8 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with ArchiCOW.  If not, see <http://www.gnu.org/licenses/>.
 #
-from __future__ import print_function, absolute_import
-
+import logging
 import subprocess
 
 from unipath import Path
@@ -30,6 +29,7 @@ from ..storage import target_type
 RSYNC = '/usr/bin/rsync'
 SSH = '/usr/bin/ssh'
 
+logger = logging.getLogger(__name__)
 
 class RsyncProcess(BaseProcess):
     def __init__(self, config, storage_cls):
@@ -45,10 +45,10 @@ class RsyncProcess(BaseProcess):
 
     def backup(self):
         with self.storage.new_target(target_type.DIR, self.target_path) as target:
-            print('rsync from {} to {}'.format(self.source_path, target.path))
+            logger.debug('rsync from %s to %s', self.source_path, target.path)
             args = [RSYNC, '--archive', '--verbose', '--protect-args', '--del', '--delete-excluded']
-            if target.inplace:
-                args.append('--inplace')
+            if target.inplace is not None:
+                args.append('--inplace' if target.inplace else '--no-inplace')
             for pattern in self.exclude:
                 args.extend(['--exclude', pattern])
             # ssh connection parameters
@@ -69,7 +69,7 @@ class RsyncProcess(BaseProcess):
             else:
                 args.append('{}/'.format(self.source_path))
             args.append(target.path)
-            print(repr(args))
+            logger.debug('Running: %s', repr(args))
             rsync = subprocess.Popen(args, shell=False)
             rsync.communicate()
 

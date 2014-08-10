@@ -7,7 +7,7 @@
 # Base directory to hold backups
 target_base = /var/lib/archicow/backup
 process = RsyncProcess
-storage = SimpleStorage
+storage = HardlinkStorage
 
 # User-defined values can be used as variables, e.g. %(config_dir)s
 config_dir = /etc/archicow
