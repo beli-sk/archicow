@@ -1,1 +1,1 @@
-include README.rst LICENSE data/*
+include README.rst LICENSE data/* prepscripts/*

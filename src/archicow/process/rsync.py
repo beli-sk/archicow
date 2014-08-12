@@ -28,6 +28,7 @@ from ..storage import target_type
 
 RSYNC = '/usr/bin/rsync'
 SSH = '/usr/bin/ssh'
+SUDO = '/usr/bin/sudo'
 
 logger = logging.getLogger(__name__)
 
@@ -36,17 +37,22 @@ class RsyncProcess(BaseProcess):
         self.user = config.getc('user')
         self.host = config.getc('host')
         self.port = config.getc('port', type_=int)
-        self.source_path = Path(config.getc('source_path'))
+        self.source_path = config.getc('source_path')
+        self.orig_source_path = self.source_path
         self.key_path = config.getc('key_path')
         self.target_path = Path(config.getc('target_path'))
         self.remote_sudo = config.getc('remote_sudo', type_=bool)
+        self.local_sudo = config.getc('local_sudo', type_=bool)
         self.exclude = config.getlist('exclude', default=[])
         self.storage = storage_cls(config.getc('target_base'))
+        self.prepare_script = config.getc('prepare_script')
 
     def backup(self):
         with self.storage.new_target(target_type.DIR, self.target_path) as target:
             logger.debug('rsync from %s to %s', self.source_path, target.path)
             args = [RSYNC, '--archive', '--verbose', '--protect-args', '--del', '--delete-excluded']
+            if local_sudo:
+                args.insert(0, SUDO)
             if target.inplace is not None:
                 args.append('--inplace' if target.inplace else '--no-inplace')
             for pattern in self.exclude:
@@ -59,6 +65,9 @@ class RsyncProcess(BaseProcess):
                 ssh_args.extend(['-i', self.key_path])
             if self.port:
                 ssh_args.extend(['-p', str(self.port)])
+            if self.prepare_script:
+                if not self.prepare(ssh_args):
+                    raise Exception('Prepare script failed')
             args.extend(['-e', ' '.join(ssh_args)])
             # remote sudo
             if self.remote_sudo:
@@ -72,6 +81,49 @@ class RsyncProcess(BaseProcess):
             logger.debug('Running: %s', repr(args))
             rsync = subprocess.Popen(args, shell=False)
             rsync.communicate()
+            self.prepare(ssh_args, done=True)
+            if rsync.returncode != 0:
+                raise Exception('Rsync failed with code %d', rsync.returncode)
+
+    def prepare(self, ssh_args, done=False):
+        # call remote prepare script before and after backup
+        ssh_args = ssh_args[:]
+        ssh_args.append(self.host)
+        if self.remote_sudo:
+            ssh_args.append('sudo')
+        ssh_args.append(self.prepare_script)
+        if done:
+            ssh_args.append('CLEANUP')
+            ssh_args.append(self.orig_source_path)
+        else:
+            ssh_args.append('PREPARE')
+            ssh_args.append(self.source_path)
+        logger.debug('Prepare script: %s', repr(ssh_args))
+        script = subprocess.Popen(ssh_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
+        out, err = script.communicate()
+        out = out.strip()
+        err = err.strip()
+        if not done:
+            if script.returncode != 0:
+                logger.error('Remote prepare script failed with code %d', script.returncode)
+                level = logging.ERROR
+                ret = False
+            else:
+                self.source_path = out
+                level = logging.DEBUG
+                ret = True
+        else:
+            if script.returncode != 0:
+                ret = False
+                logger.error('Remote post-backup script failed with code %d', script.returncode)
+                level = logging.ERROR
+            else:
+                ret = True
+                level = logging.DEBUG
+        if level:
+            logger.log(level, 'Script output: %s', out)
+            logger.log(level, 'Script stderr: %s', err)
+        return ret
 
 
 register_process(RsyncProcess)

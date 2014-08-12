@@ -34,3 +34,7 @@ target_path = example.com/rbackup
 # Exclude list for rsync, patterns separated by ||
 #exclude = file2||file3
 
+# Use sudo for remote rsync and prepare script
+#remote_sudo = 1
+# Same for local rsync
+#local_sudo
