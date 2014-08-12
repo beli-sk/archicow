@@ -13,13 +13,39 @@ Contents:
 
 
 Overview
---------
+~~~~~~~~
 
 Backup system supporting copy-on-write storage.
 
 
+Features
+--------
+
+* aims to be easy, admin friendly tool
+
+  + runs from cron
+  + simple filesystem structure of backups, accessible without need for special tools
+  + outputs machine parsable status of your backups for monitoring tools (planned)
+
+* pluggable backup methods
+
+  + rsync over SSH
+  + tar over SSH (planned)
+
+* pluggable backup storage modules
+
+  + simple file or directory
+  + incremental with hard links between common files
+  + BTRFS snapshot incremental storage (planned)
+
+* optional remote helper scripts to prepare data for backup
+
+  + create LVM snapshot for consistency
+  + bind-mount root FS for clean backup without other mounts (planned)
+  + dump database (planned)
+
 Locations
----------
+~~~~~~~~~
 
 The `project page <https://github.com/beli-sk/arhicow>`_ is hosted on Github.
 
@@ -33,7 +59,7 @@ also drop me a line at <devel@beli.sk>.
 
 
 License
--------
+~~~~~~~
 
 Copyright 2014 Michal Belica <devel@beli.sk>
 
