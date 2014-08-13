@@ -1,1 +1,3 @@
 include README.rst LICENSE data/* prepscripts/*
+graft doc
+prune doc/_build

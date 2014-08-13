@@ -11,6 +11,9 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   install
+   config
+
 
 Overview
 ~~~~~~~~
@@ -80,12 +83,4 @@ Copyright 2014 Michal Belica <devel@beli.sk>
 
 A copy of the license can be found in the ``LICENSE`` file in the
 distribution.
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 

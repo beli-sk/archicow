@@ -39,7 +39,7 @@ setup(
         'unipath',
         ],
     package_dir={'': 'src'},
-    packages=['archicow'],
+    packages=['archicow', 'archicow.process', 'archicow.storage'],
     entry_points={
         'console_scripts': [
             'archicow = archicow:main',
