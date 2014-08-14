@@ -59,7 +59,7 @@ copyright = u'2014, Michal Belica'
 # built documents.
 #
 # The short X.Y version.
-version = defs['__version__'].rsplit('.', 1)[0]
+version = '.'.join(defs['__version__'].split('.')[0:3])
 # The full version, including alpha/beta/rc tags.
 release = defs['__version__']
 
@@ -118,10 +118,10 @@ html_theme = 'default'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-#html_title = None
+html_title = '{} {} documentation'.format(project, version)
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
-#html_short_title = None
+html_short_title = '{} {}'.format(project, version)
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.

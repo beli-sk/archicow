@@ -9,13 +9,16 @@ Development status: **Pre-Alpha**
 Locations
 ---------
 
-The `project page <https://github.com/beli-sk/arhicow>`_ is hosted on Github.
+ArhiCOW packages are available from Cheese shop (PyPI) at
+https://pypi.python.org/pypi/archicow
+
+The `project page <https://github.com/beli-sk/archicow>`_ is hosted on Github.
 
 If you've never worked with *git* or contributed to a project on Github,
 there is a `quick start guide <https://help.github.com/articles/fork-a-repo>`_.
 
 If you find something wrong or know of a missing feature, please
-`create an issue <https://github.com/beli-sk/unixaccount/issues>`_ on the project
+`create an issue <https://github.com/beli-sk/archicow/issues>`_ on the project
 page. If you find that inconvenient or have some security concerns, you could
 also drop me a line at <devel@beli.sk>.
 
