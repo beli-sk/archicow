@@ -14,7 +14,7 @@ https://pypi.python.org/pypi/archicow
 
 **Documentation** is available online at http://pythonhosted.org/archicow/
 
-The **`project page <https://github.com/beli-sk/archicow>`_** is hosted on Github.
+The `**project page** <https://github.com/beli-sk/archicow>`_ is hosted on Github.
 
 If you've never worked with *git* or contributed to a project on Github,
 there is a `quick start guide <https://help.github.com/articles/fork-a-repo>`_.
