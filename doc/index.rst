@@ -50,6 +50,9 @@ Features
 Locations
 ~~~~~~~~~
 
+ArchiCOW packages are available from Cheese shop (PyPI) at
+https://pypi.python.org/pypi/archicow
+
 The `project page <https://github.com/beli-sk/archicow>`_ is hosted on Github.
 
 If you've never worked with *git* or contributed to a project on Github,

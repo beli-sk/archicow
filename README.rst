@@ -9,7 +9,7 @@ Development status: **Pre-Alpha**
 Locations
 ---------
 
-ArhiCOW packages are available from Cheese shop (PyPI) at
+ArchiCOW packages are available from Cheese shop (PyPI) at
 https://pypi.python.org/pypi/archicow
 
 The `project page <https://github.com/beli-sk/archicow>`_ is hosted on Github.
