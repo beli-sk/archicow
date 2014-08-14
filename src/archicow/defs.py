@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with ArchiCOW.  If not, see <http://www.gnu.org/licenses/>.
 #
-__version__ = '0.0.1.dev0'
+__version__ = '0.0.1.dev1'
 app_name = 'ArchiCOW'
 app_description = 'Backup system supporting copy-on-write storage.'
 app_name_desc = '{} - {}'.format(app_name, app_description)
