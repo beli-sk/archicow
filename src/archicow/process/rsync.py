@@ -51,7 +51,7 @@ class RsyncProcess(BaseProcess):
         with self.storage.new_target(target_type.DIR, self.target_path) as target:
             logger.debug('rsync from %s to %s', self.source_path, target.path)
             args = [RSYNC, '--archive', '--verbose', '--protect-args', '--del', '--delete-excluded']
-            if local_sudo:
+            if self.local_sudo:
                 args.insert(0, SUDO)
             if target.inplace is not None:
                 args.append('--inplace' if target.inplace else '--no-inplace')
@@ -81,7 +81,8 @@ class RsyncProcess(BaseProcess):
             logger.debug('Running: %s', repr(args))
             rsync = subprocess.Popen(args, shell=False)
             rsync.communicate()
-            self.prepare(ssh_args, done=True)
+            if self.prepare_script:
+                self.prepare(ssh_args, done=True)
             if rsync.returncode != 0:
                 raise Exception('Rsync failed with code %d', rsync.returncode)
 
