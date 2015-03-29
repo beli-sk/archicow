@@ -20,27 +20,27 @@
 def reverse_dict(d):
     "Return reverse dict with key-value pairs reversed."
     d2 = dict()
-    for k, v in d.iteritems():
+    for k, v in d.items():
         d2[v] = k
     return d2
 
 class XEnum(dict):
     def __init__(self, *a, **kw):
-        super(XEnum, self).__init__(*a, **kw)
+        super().__init__(*a, **kw)
         # to bypass custom __setattr__()
-        super(XEnum, self).__setattr__('rev', reverse_dict(self))
+        super().__setattr__('rev', reverse_dict(self))
 
     def __setitem__(self, key, value):
         try:
             del(self.rev[self[key]])
         except KeyError:
             pass
-        super(XEnum, self).__setitem__(key, value)
+        super().__setitem__(key, value)
         self.rev[value] = key
 
     def __delitem__(self, key):
         del(self.rev[self[key]])
-        super(XEnum, self).__delitem__(key)
+        super().__delitem__(key)
 
     def __getattr__(self, name):
         try:

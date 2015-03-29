@@ -20,7 +20,7 @@
 import logging
 import argparse
 from collections import OrderedDict
-from ConfigParser import SafeConfigParser
+from importlib import import_module
 
 from .defs import __version__, app_name, app_description, app_name_desc
 from .confparse import CustomConfigParser
@@ -56,6 +56,11 @@ def main():
     for job in args.jobs:
         logger.info('Starting job %s.', job)
         config.current_section = 'JOB:{}'.format(job)
+
+        # import configured modules
+        for mod in config.getc('modules').split():
+            import_module(mod)
+
         process_cls = process_types[config.getc('process')]
         storage_cls = storage_types[config.getc('storage')]
         process = process_cls(config, storage_cls)

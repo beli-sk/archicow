@@ -23,11 +23,3 @@ import pkgutil
 from unipath import Path
 
 from .base import BaseProcess, process_types
-
-
-process_lib_paths = [Path(__file__).parent]
-for importer, package_name, _ in pkgutil.iter_modules(process_lib_paths):
-    full_package_name = 'archicow.process.%s' % package_name
-    if full_package_name not in sys.modules:
-        module = importer.find_module(package_name
-                ).load_module(full_package_name)

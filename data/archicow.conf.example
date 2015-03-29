@@ -6,6 +6,9 @@
 [DEFAULT]
 # Base directory to hold backups
 target_base = /var/lib/archicow/backup
+modules =
+  archicow.process.rsync
+  archicow.storage.hardlink
 process = RsyncProcess
 storage = HardlinkStorage
 

@@ -59,6 +59,13 @@ Sections defining backup jobs are named by the job name with ``JOB:`` prefix.
 
 Job specification contains these common parameters:
 
+``modules``
+   Module files to load in Python import format. To load module files that are
+   part of the ArchiCOW distribution, prefix the base file name with either
+   ``archicow.storage.`` or ``archicow.process.`` for storage and process
+   modules respectively, e.g.
+   ``modules: archicow.process.rsync archicow.storage.hardlink``
+
 ``process``
    One of supported backup modules to use for the job.
 

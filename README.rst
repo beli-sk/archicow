@@ -5,6 +5,8 @@ Backup system supporting copy-on-write storage.
 
 Development status: **Pre-Alpha**
 
+**NOTE:** ArchiCOW requires Python 3.1 or later. Tested with Python 3.4.
+
 
 Locations
 ---------
