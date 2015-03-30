@@ -4,6 +4,8 @@ Process modules
 RsyncProcess
 ~~~~~~~~~~~~
 
+Module file: ``archicow.process.rsync``
+
 Use rsync over SSH to backup a directory on remote host to local target
 directory (provided by a storage module).
 

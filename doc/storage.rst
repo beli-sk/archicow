@@ -4,7 +4,11 @@ Storage modules
 HardlinkStorage
 ~~~~~~~~~~~~~~~
 
-Incremental storage implemented using hardlinks on local filesystem.
+Module file: ``archicow.storage.hardlink``
+
+Incremental storage implemented using hardlinks on local filesystem. This
+module requires that the underlying filesystem supports hard links with
+``cp -l`` command.
 
 Incremental means that only changes between backups are recorded, common files
 do not add to the total space used at the target filesystem.
@@ -21,7 +25,7 @@ the incomplete backup.
 BtrfsStorage
 ~~~~~~~~~~~~
 
-Module file: archicow.storage.btrfs
+Module file: ``archicow.storage.btrfs``
 
 Incremental storage implemented using snapshots on Btrfs filesystem.
 
