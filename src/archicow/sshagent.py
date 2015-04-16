@@ -33,7 +33,6 @@ class SSHAgent(object):
         self.SSH_AGENT_PID = self.agent_process.pid
         while True:
             line = self.agent_process.stdout.readline()
-            print 'line', line
             if line.startswith('SSH_AUTH_SOCK'):
                 self.SSH_AUTH_SOCK = line.split('=')[1].split(';')[0]
                 break

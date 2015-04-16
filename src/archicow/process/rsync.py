@@ -110,7 +110,7 @@ class RsyncProcess(BaseProcess):
                 level = logging.ERROR
                 ret = False
             else:
-                self.source_path = out
+                self.source_path = out.decode('utf-8')
                 level = logging.DEBUG
                 ret = True
         else:

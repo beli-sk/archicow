@@ -17,9 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with ArchiCOW.  If not, see <http://www.gnu.org/licenses/>.
 #
-from configparser import SafeConfigParser, NoOptionError
+from configparser import ConfigParser, NoOptionError
 
-class CustomConfigParser(SafeConfigParser):
+class CustomConfigParser(ConfigParser):
     current_section = None
 
     def getc(self, option, default=None, section=None, type_=None):

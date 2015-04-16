@@ -87,7 +87,7 @@ class BtrfsStorage(BaseStorage):
                 self._new_from(latest, target_path_ts)
         else:
             raise ValueError('BtrfsStorage supports only directory backups.')
-        return BackupTarget(self, target_path_ts, inplace=False)
+        return BackupTarget(self, target_path_ts, inplace=True)
 
     def _new_from(self, src, dst):
         args = [self.btrfs_path, 'subvolume', 'snapshot', src, dst]
