@@ -32,8 +32,8 @@ Scripts included in ArchiCOW distribution are covered in following sections.
 Mount bind -- ``prepare_mountbind.sh``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Bind-mount (``mount -o bind``)the source filesystem to another path before
-backup. This may be needed for mostly for the root filesystem to get a clean
+Bind-mount (``mount -o bind``) the source filesystem to another path before
+backup. This may be needed mostly for the root filesystem to get a clean
 view, without other filesystems mounted over it.
 
 Expects ``source_path`` value with these components, separated by spaces::

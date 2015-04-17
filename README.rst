@@ -30,7 +30,7 @@ also drop me a line at <devel@beli.sk>.
 License
 -------
 
-Copyright 2014 Michal Belica <devel@beli.sk>
+Copyright 2014-2015 Michal Belica <devel@beli.sk>
 
 ::
 
