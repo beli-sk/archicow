@@ -27,7 +27,7 @@ Features
 * aims to be easy, admin friendly tool
 
   + runs from cron
-  + simple filesystem structure of backups, accessible without need for special tools
+  + simple filesystem structure of backups, accessible without the need of special tools
   + outputs machine parsable status of your backups for monitoring tools (planned)
 
 * pluggable backup methods
@@ -39,12 +39,12 @@ Features
 
   + simple file or directory
   + incremental with hard links between common files
-  + BTRFS snapshot incremental storage (planned)
+  + BTRFS snapshot incremental storage
 
 * optional remote helper scripts to prepare data for backup
 
   + create LVM snapshot for consistency
-  + bind-mount root FS for clean backup without other mounts (planned)
+  + bind-mount root FS for clean backup without other mounts
   + dump database (planned)
 
 Locations
