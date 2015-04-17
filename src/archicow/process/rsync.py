@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with ArchiCOW.  If not, see <http://www.gnu.org/licenses/>.
 #
+import shlex
 import logging
 import subprocess
 
@@ -46,15 +47,22 @@ class RsyncProcess(BaseProcess):
         self.exclude = config.getlist('exclude', default=[])
         self.storage = storage_cls(config.getc('target_base'))
         self.prepare_script = config.getc('prepare_script')
+        self.rsync_args = config.getc('rsync_args')
 
     def backup(self):
         with self.storage.new_target(target_type.DIR, self.target_path) as target:
             logger.debug('rsync from %s to %s', self.source_path, target.path)
             args = [RSYNC, '--archive', '--verbose', '--protect-args', '--del', '--delete-excluded']
+            rsync_args_list = shlex.split(self.rsync_args) if self.rsync_args is not None else []
             if self.local_sudo:
                 args.insert(0, SUDO)
             if target.inplace is not None:
-                args.append('--inplace' if target.inplace else '--no-inplace')
+                if target.inplace and \
+                        '-S' not in rsync_args_list and \
+                        '--sparse' not in rsync_args_list:
+                    args.append('--inplace')
+                else:
+                    args.append('--no-inplace')
             for pattern in self.exclude:
                 args.extend(['--exclude', pattern])
             # ssh connection parameters
@@ -72,6 +80,8 @@ class RsyncProcess(BaseProcess):
             # remote sudo
             if self.remote_sudo:
                 args.extend(['--rsync-path', 'sudo rsync'])
+            # extra args
+            args.extend(rsync_args_list)
             # source and destination
             if self.host:
                 args.append('{}:{}/'.format(self.host, self.source_path))

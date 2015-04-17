@@ -30,6 +30,9 @@ Configuration parameters
    rsync as ``--exclude`` parameter. For details please see rsync
    documentation.
 
+``rsync_args``
+   Extra command line arguments for rsync.
+
 ``remote_sudo``
    Use sudo when running rsync on remote side.
 
