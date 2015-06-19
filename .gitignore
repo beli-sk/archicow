@@ -1,5 +1,0 @@
-*.py[co]
-build/
-dist/
-src/archicow.egg-info/
-doc/_build/
